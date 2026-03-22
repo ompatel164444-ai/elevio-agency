@@ -113,9 +113,9 @@ export function Footer() {
         >
           <p>© {year} Elevio. All rights reserved.</p>
           <p>
-            Built with ❤️ using{" "}
+            HANDMADE WITH ❤️ WITH ELEVIO
             <a
-              href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
+              href={`}`}
               target="_blank"
               rel="noopener noreferrer"
               className="transition-colors"
