@@ -1,0 +1,254 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans.woff2") format("woff2");
+  font-weight: 200 700;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Elevio light palette */
+    --background: 0.98 0.005 240;
+    --foreground: 0.15 0.02 240;
+    --card: 1 0 0;
+    --card-foreground: 0.15 0.02 240;
+    --popover: 1 0 0;
+    --popover-foreground: 0.15 0.02 240;
+    --primary: 0.55 0.2 255;
+    --primary-foreground: 1 0 0;
+    --secondary: 0.96 0.01 240;
+    --secondary-foreground: 0.15 0.02 240;
+    --muted: 0.96 0.008 240;
+    --muted-foreground: 0.45 0.02 240;
+    --accent: 0.93 0.05 255;
+    --accent-foreground: 0.45 0.02 240;
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 1 0 0;
+    --border: 0.92 0.01 240;
+    --input: 0.94 0.01 240;
+    --ring: 0.55 0.2 255;
+    --chart-1: 0.55 0.2 255;
+    --chart-2: 0.52 0.22 290;
+    --chart-3: 0.6 0.18 210;
+    --chart-4: 0.628 0.189 84;
+    --chart-5: 0.769 0.188 70;
+    --sidebar: 0.96 0.008 240;
+    --sidebar-foreground: 0.15 0.02 240;
+    --sidebar-primary: 0.55 0.2 255;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.93 0.05 255;
+    --sidebar-accent-foreground: 0.15 0.02 240;
+    --sidebar-border: 0.92 0.01 240;
+    --sidebar-ring: 0.55 0.2 255;
+
+    /* Elevio brand tokens */
+    --elevio-blue: 0.55 0.2 255;
+    --elevio-violet: 0.52 0.22 290;
+    --elevio-cyan: 0.6 0.18 210;
+    --elevio-text-muted: 0.45 0.02 240;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: oklch(0.55 0.2 255 / 20%);
+    color: oklch(0.15 0.02 240);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: oklch(var(--background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(var(--border));
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(var(--elevio-blue) / 40%);
+  }
+}
+
+/* Custom cursor */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: oklch(0.55 0.2 255 / 50%);
+  box-shadow: 0 0 12px 3px oklch(0.55 0.2 255 / 30%);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+}
+
+.custom-cursor.hovering {
+  width: 36px;
+  height: 36px;
+  background: oklch(0.55 0.2 255 / 20%);
+  border: 1.5px solid oklch(0.55 0.2 255 / 60%);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    oklch(0.55 0.2 255),
+    oklch(0.52 0.22 290),
+    oklch(0.6 0.18 210)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient border utility */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    oklch(0.55 0.2 255 / 30%),
+    oklch(0.52 0.22 290 / 15%),
+    transparent
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Glow button */
+.btn-glow {
+  background: linear-gradient(135deg, oklch(0.55 0.2 255), oklch(0.52 0.22 290));
+  box-shadow: 0 4px 20px oklch(0.55 0.2 255 / 30%), 0 2px 8px
+    oklch(0.52 0.22 290 / 15%);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+.btn-glow:hover {
+  box-shadow: 0 6px 28px oklch(0.55 0.2 255 / 45%), 0 4px 16px
+    oklch(0.52 0.22 290 / 25%);
+  transform: translateY(-2px);
+}
+
+/* Hero glow orbs */
+@keyframes float-orb {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -40px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+@keyframes float-orb-2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-40px, 30px) scale(1.08);
+  }
+  66% {
+    transform: translate(25px, -20px) scale(0.92);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.orb-1 {
+  animation: float-orb 12s ease-in-out infinite;
+}
+.orb-2 {
+  animation: float-orb-2 15s ease-in-out infinite;
+}
+.orb-3 {
+  animation: float-orb 18s ease-in-out infinite reverse;
+}
+
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Wave ribbon */
+@keyframes wave-drift {
+  0%,
+  100% {
+    transform: translateX(-10%) skewY(-3deg);
+  }
+  50% {
+    transform: translateX(5%) skewY(2deg);
+  }
+}
+.wave-ribbon {
+  animation: wave-drift 8s ease-in-out infinite;
+}
+
+/* Loading spinner */
+@keyframes load-ring {
+  0% {
+    stroke-dashoffset: 200;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
