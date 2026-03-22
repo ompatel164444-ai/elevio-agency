@@ -127,7 +127,7 @@ export function Footer() {
                 e.currentTarget.style.color = "oklch(0.55 0.2 255)";
               }}
             >
-              caffeine.ai
+              :
             </a>
           </p>
         </div>
